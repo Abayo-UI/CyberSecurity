@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <link rel="stylesheet" href="cybersec.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+        <script type="text/babel">
+
+       let questionNumber = -1;
+       let counter = 0;
+
+       const cyberSecQuestions = [
+  {
+    question: " 2) What is the most common type of cyber attack?",
+    answer1: "Phishing",
+    answer2: "Denial-of-Service (DoS) attack",
+    answer3: "Social engineering",
+  },
+  {
+    question: " 3) What is the purpose of encryption in cybersecurity?",
+    answer1: "To detect and prevent unauthorized access to a system.",
+    answer2: "To protect data by converting it into a form that is unreadable to unauthorized users.",
+    answer3: "To monitor and analyze network traffic for security threats.",
+  },
+  {
+    question: " 4) What is a vulnerability assessment?",
+    answer1: "The process of identifying and exploiting security vulnerabilities in a system.",
+    answer2: "The process of identifying and prioritizing security vulnerabilities in a system.",
+    answer3: "The process of recovering from a security breach and restoring normal operations.",
+  },
+  {
+    question: " 5) What is multi-factor authentication?",
+    answer1: "A security measure that relies on a single factor, such as a password.",
+    answer2: "A security measure that requires multiple factors, such as a password, fingerprint, and security token.",
+    answer3: "A security measure that restricts access to authorized personnel only.",
+  },
+  {
+    question: " 6) What is a DDoS attack?",
+    answer1: "An attack that aims to gain unauthorized access to a system.",
+    answer2: "An attack that overwhelms a system with a flood of internet traffic, making it unavailable to users.",
+    answer3: "An attack that steals confidential information by intercepting communication between two parties.",
+  },
+  {
+    question: " 7) What is the purpose of a penetration test?",
+    answer1: "To test the performance and scalability of a system under high load.",
+    answer2: "To identify vulnerabilities in a system by simulating an attacker's actions.",
+    answer3: "To monitor and analyze network traffic to detect security incidents.",
+  },
+  {
+    question: " 8) What is the difference between a virus and a worm?",
+    answer1: "A virus spreads through networks, while a worm spreads through email attachments.",
+    answer2: "A virus requires user action to spread, while a worm can spread automatically without user intervention.",
+    answer3: "There is no difference between a virus and a worm; they are the same type of malware.",
+  },
+  {
+    question: " 9) What is a ransomware attack?",
+    answer1: "An attack that steals sensitive information from a system.",
+    answer2: "An attack that encrypts a victim's files and demands a ransom for their release.",
+    answer3: "An attack that floods a network with traffic to overwhelm and disrupt its operation.",
+  },
+  {
+    question: " 10) What is the purpose of a VPN (Virtual Private Network)?",
+    answer1: "To protect physical servers from unauthorized access.",
+    answer2: "To create a secure and encrypted connection over a public network, such as the internet.",
+    answer3: "To monitor and control network traffic based on predefined security policies.",
+  },
+  {
+    question: " 11) What is social engineering in the context of cybersecurity?",
+    answer1: "The process of securing physical access to a building or facility.",
+    answer2: "The psychological manipulation of individuals to trick them into revealing sensitive information.",
+    answer3: "The use of automated tools to scan and identify vulnerabilities in a system.",
+  },
+  {
+    question: " 12) What is the purpose of intrusion detection systems (IDS)?",
+    answer1: "To prevent unauthorized access to a system by monitoring user activity.",
+    answer2: "To detect and alert on potential security breaches or malicious activities in a network.",
+    answer3: "To encrypt data during transmission to protect it from interception.",
+  },
+  {
+    question: " 13) What is a zero-day vulnerability?",
+    answer1: "A vulnerability that has been publicly disclosed but not yet patched.",
+    answer2: "A vulnerability that is unknown to the software vendor and has no available patch.",
+    answer3: "A vulnerability that is already being actively exploited by attackers.",
+  },
+  {
+    question: " 14) What is the purpose of access control in cybersecurity?",
+    answer1: "To monitor and log user activities for auditing purposes.",
+    answer2: "To restrict access to resources based onHere's the set of cybersecurity questions with the correct answer labeled.",
+    answer3: "A plan to monitor and detect security incidents in realtime.",
+  },
+  {
+    question: " 15) What is the concept of defense in depth in cybersecurity?",
+    answer1: "The practice of relying on a single security measure to protect against all threats.",
+    answer2: "The practice of implementing multiple layers of security controls to provide overlapping protection.",
+    answer3: "The practice of isolating critical systems from the network to prevent unauthorized access.",
+  },
+];
+    class CyberSec  extends React.Component{
+           constructor(props){
+            super(props);
+            this.state = {
+                  question: " 1) What is a firewall?",
+                  answer1: "A physical barrier used to protect computer hardware.",
+                  answer2: "A network security device that monitors and filters network traffic.",
+                  answer3: "A software tool used to encrypt data during transmission."
+            }
+            this.handleClick = this.handleClick.bind(this);
+            this.nextQuestion = this.nextQuestion.bind(this);
+            this.handleChange = this.handleChange.bind(this);
+            this.handleChangeCorrect = this.handleChangeCorrect.bind(this);
+           }
+
+           handleClick(){
+             this.setState(this.nextQuestion);
+           } 
+
+            nextQuestion(){ 
+            questionNumber += 1;
+                    
+            
+            if(questionNumber  < cyberSecQuestions.length){
+                return cyberSecQuestions[questionNumber];
+            }
+            else{
+              let result;
+                result = Math.floor(counter * 6.67);
+                const elementToRemove = document.querySelector("#remove");
+                elementToRemove.style.display = 'none';
+                const buttonToRemove = document.querySelector("#nextButton");
+                buttonToRemove.style.display = 'none';
+                return {
+                question: `Your overall score is ${result}%. If you managed to score above 66%  we recommend you to consider Cyber Security as Your career choice.`,
+                answer1:"",
+                answer2:"",
+                answer3:""
+            }
+            }
+           }
+
+           handleChange(){
+                alert("Incorrect! Choice b is the correct answer.Kindly Proceed to the next question");
+                this.handleClick();  
+            }
+
+            handleChangeCorrect(){
+            counter = counter + 1;
+             setTimeout(() => {
+             this.handleClick();
+             }, 2000); 
+            }
+
+           render(){
+            return(
+                <div className="background">
+
+                    <nav class="navbar  fixed-top navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand">CYBER SECURITY</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Courses</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body Courses">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Full Stack Development</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Game Development</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">App Development</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">S/W engineering</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Cyber security</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Data Science</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Web Design</a>
+          </li>
+        </ul>
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+                    
+                     <div className="question col-lg-4 col-11 h-auto pb-4 pt-5 px-4 mt-5">
+                        <p className="text-white fs-5">{this.state.question}</p>
+
+        <form id="remove">
+ 
+        <div style={{ display: 'flex', alignItems: 'center' , display:"none"}}>
+             <input type="radio" name="questionOne" checked="true"/>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', lineHeight:"18px" }}>
+             <input onClick={this.handleChange} type="radio" className="me-2 mb-3" name="questionOne"/>
+             <p style={{display:'inline',fontWeight:"700",fontSize:"1.2rem" }}>{this.state.answer1}</p>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', lineHeight:"18px" }}>
+             <input  onClick={this.handleChangeCorrect}type="radio" className="me-2 mb-3" name="questionOne"/>
+             <p style={{display:'inline',fontWeight:"700",fontSize:"1.2rem" }}>{this.state.answer2}</p>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', lineHeight:"18px" }}>
+             <input onClick={this.handleChange} type="radio" className="me-2 mb-3" name="questionOne"/>
+             <p style={{display:'inline',fontWeight:"700",fontSize:"1.2rem" }}>{this.state.answer3}</p>
+        </div>
+        </form>
+        <div className="lastContainer">
+           <div className="rounded-5  pt-2 w-25 h-auto bg-light text-center fs-5" >{counter}/15</div>
+           <button id="nextButton" onClick={this.handleClick}className="w-50 pt-2 h-auto rounded-5 border border-none text-center"><p>NEXT</p></button> 
+           </div>
+        </div>
+        </div>
+            )
+           }
+          }
+          ReactDOM.render(<CyberSec/>, document.getElementById('root'))
+        </script>
+    </head>
+
+    <body class="back">
+        <div id="root">
+        </div>
+    </body>
+
+</html>
